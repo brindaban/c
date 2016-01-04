@@ -16,3 +16,15 @@ Array_util resize(Array_util array, int length){
 	return array;
 }
 
+int areEqual (Array_util firstArray, Array_util secondArray){
+	char * first_char_list = (char *)(firstArray.base);
+	char * second_char_list = (char *)(secondArray.base); 
+	if(firstArray.length != secondArray.length || firstArray.type_size != secondArray.type_size)
+		return 0;
+	for (int index = 0; index < firstArray.length; index++)
+		if(first_char_list[index] != second_char_list[index])
+			return 0;
+	return 1;
+}
+
+
