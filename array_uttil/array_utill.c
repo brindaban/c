@@ -81,6 +81,14 @@ int isEven(void* hint, void* item){
 	int * number = (int *)(item);
 	return !(*number % 2);
 }
+
+int isDivisible(void* hint, void* item){
+	int * numerator = (int *)(item);
+	int * denominator = (int *)(hint);
+	if(( *numerator % *denominator ) == 0) return 1;
+	return 0;
+}
+
 void test_for_find_first(){
 	Array_util array = create(4,5);
 	int *numbers = (int *)(array.base);
@@ -91,9 +99,12 @@ void test_for_find_first(){
 	numbers[3] = 8;
 	numbers[4] = 5;
 
-	void * hint = NULL;
-	int * result = (int *)findFirst(array, &isEven, hint);
-	assert(*result == 6);
+	void * even_hint = NULL;
+	int * even_result = (int *)findFirst(array, &isEven, even_hint);
+	assert(*even_result == 6);
+	int divide_hint = 3;
+	int * divide_result = (int *)findFirst(array, &isDivisible, &divide_hint);
+	assert(*divide_result == 3);
 }
 
 void use_of_dispose(){
