@@ -11,10 +11,11 @@ void test_for_create(){
 	numbers = (int *)(array.base);
 	numbers[0]=5;
 	assert(numbers[0]==5);
+	dispose(array);
 }
 
 void test_for_resize(){
-	Array_util array;
+	Array_util array, array2;
 	Array_util resized_array;
 	int *numbers;
 	int *another_numbers;
@@ -32,14 +33,14 @@ void test_for_resize(){
 
 	resized_array = resize(resized_array,15);
 	assert(resized_array.length == 15);
+	dispose(resized_array);
 }
 
 void push_element_in_array(Array_util array){
-	char * characters;
-	characters = (char *)(array.base);
-	for (int index = 0; index < array.length; index++){
-		characters[index] = 65 + index;
-	}
+	int * numbers;
+	numbers = (int *)(array.base);
+	for (int index = 0; index < array.length; index++)
+		numbers[index] = 65 + index;
 }
 
 void test_for_areEqual(){
@@ -56,11 +57,37 @@ void test_for_areEqual(){
 	assert(areEqual(firstArray,secondArray)==0);
 	push_element_in_array(secondArray);
 	assert(areEqual(firstArray,secondArray)==1);
+	dispose(firstArray);
+	dispose(secondArray);
+}
+
+void test_for_find_index(){
+	Array_util array;
+	array = create(1,2);
+	char * characters = (char *)(array.base);
+	characters[0]='A';
+	characters[1]='B';
+	char first_element = 'A';
+	char second_element = 'B';
+	char extra_element = 'C';
+	assert(findIndex(array,&first_element)==0);
+	assert(findIndex(array,&second_element)==1);
+	assert(findIndex(array,&extra_element)==-1);
+
+
+}
+
+void use_of_dispose(){
+	Array_util array;
+	array = create(4,13);
+	dispose(array);
 }
 
 int main(int argc, char const *argv[]){
 	test_for_create();
 	test_for_resize();
 	test_for_areEqual();
+	test_for_find_index();
+	use_of_dispose();
 	return 0;
 }

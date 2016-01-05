@@ -1,5 +1,6 @@
 #include "array_utill.h"
 #include "stdlib.h"
+#include "string.h"
 
 Array_util create(int type_size, int length){
 	Array_util created_array;
@@ -26,5 +27,23 @@ int areEqual (Array_util firstArray, Array_util secondArray){
 			return 0;
 	return 1;
 }
+
+void dispose(Array_util array){
+	free(array.base);
+}
+
+int findIndex(Array_util array, void* element){
+	char * list_of_array = (char *)(array.base);
+	for (int counter = 0; counter < array.length; counter++){
+		if(memcmp(list_of_array,element,array.type_size)==0)
+			return counter;
+		list_of_array += array.type_size;
+	}
+	return -1;
+}
+
+
+
+
 
 
