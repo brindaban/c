@@ -1,3 +1,5 @@
+typedef int (MatchFunc)(void *, void *);
+
 typedef struct array_util
 {
 	void * base;
@@ -10,3 +12,4 @@ Array_util resize(Array_util array, int length);
 int areEqual (Array_util firstArray, Array_util secondArray);
 void dispose(Array_util array);
 int findIndex(Array_util array, void* element);
+void* findFirst(Array_util array, MatchFunc * match, void * hint);
