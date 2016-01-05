@@ -105,6 +105,63 @@ void test_for_find_first(){
 	int divide_hint = 3;
 	int * divide_result = (int *)findFirst(array, &isDivisible, &divide_hint);
 	assert(*divide_result == 3);
+	dispose(array);
+}
+
+void test_for_find_last(){
+	Array_util array;
+	array = create(4,5);
+	int *numbers = (int *)(array.base);
+
+	numbers[0] = 1;
+	numbers[1] = 3;
+	numbers[2] = 6;
+	numbers[3] = 8;
+	numbers[4] = 5;
+	void * even_hint = NULL;
+	int * even_result = (int *)findLast(array, &isEven, even_hint);
+	assert(*even_result == 8);
+	int divide_hint = 1;
+	int * divide_result = (int *)findLast(array, &isDivisible, &divide_hint);
+	assert(*divide_result == 5);
+	dispose(array);
+
+
+}
+void test_for_reverse(){
+	Array_util array,reversed_array;
+	array = create(4,5);
+	int * numbers_of_array = (int *)(array.base);
+	numbers_of_array[0]=0;
+	numbers_of_array[1]=1;
+	numbers_of_array[2]=2;
+	numbers_of_array[3]=3;
+	numbers_of_array[4]=4;
+	reversed_array = reverse_array(array);
+	int * numbers_of_reversed_array = (int *)(reversed_array.base);
+	assert(numbers_of_reversed_array[0]==4);
+	assert(numbers_of_reversed_array[3]==1);
+	assert(numbers_of_array[3]==1);
+	dispose(array);
+}
+
+void test_for_count(){
+	Array_util array;
+	array = create(4,5);
+	int *numbers = (int *)(array.base);
+
+	numbers[0] = 1;
+	numbers[1] = 3;
+	numbers[2] = 6;
+	numbers[3] = 8;
+	numbers[4] = 5;
+	void * even_hint = NULL;
+	int even_result_count = count(array, &isEven, even_hint);
+	assert(even_result_count == 2);
+	int divide_hint = 1;
+	int divide_result_count = count(array, &isDivisible, &divide_hint);
+	assert(divide_result_count == 5);
+	dispose(array);
 }
 
 void use_of_dispose(){
@@ -119,6 +176,9 @@ int main(int argc, char const *argv[]){
 	test_for_areEqual();
 	test_for_find_index();
 	test_for_find_first();
+	test_for_find_last();
+	test_for_reverse();
+	test_for_count();
 	use_of_dispose();
 	return 0;
 }

@@ -40,10 +40,38 @@ int findIndex(Array_util array, void* element){
 	return -1;
 }
 
+Array_util reverse_array(Array_util array){
+	int temp;
+	int * numbers = (int *)(array.base);
+	for (int counter = 0; counter < array.length/2; counter++){
+		temp = numbers[counter];
+		numbers[counter]=numbers[array.length-1-counter];
+		numbers[array.length-1-counter] = temp;
+	}
+	return array;
+}
+
 void* findFirst(Array_util array, MatchFunc* match, void * hint){
 	int * numbers = array.base;
 	for (int counter = 0; counter < array.length; counter++)
 		if(match(hint,&numbers[counter]))
 			return &numbers[counter];
 	return NULL;
+}
+
+void* findLast(Array_util array, MatchFunc* match, void * hint){
+	int * numbers = array.base;
+	for (int counter = array.length-1; counter >= 0; counter--)
+		if(match(hint,&numbers[counter]))
+			return &numbers[counter];
+	return NULL;
+}
+
+int count(Array_util array, MatchFunc* match, void* hint){
+	int no_of_elements = 0; 
+	int * numbers = array.base;
+		for (int counter = 0; counter < array.length; counter++)
+			if(match(hint,&numbers[counter]))
+				no_of_elements++;
+	return no_of_elements;
 }
