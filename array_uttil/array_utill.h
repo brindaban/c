@@ -16,3 +16,4 @@ int findIndex(Array_util array, void* element);
 void* findFirst(Array_util array, MatchFunc * match, void * hint);
 void* findLast(Array_util array, MatchFunc * match, void * hint);
 int count(Array_util array, MatchFunc* match, void* hint);
+int filter(Array_util array, MatchFunc* match, void* hint, void** destination, int maxItems );

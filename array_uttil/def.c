@@ -75,3 +75,17 @@ int count(Array_util array, MatchFunc* match, void* hint){
 				no_of_elements++;
 	return no_of_elements;
 }
+
+int filter(Array_util array, MatchFunc* match, void* hint, void** destination, int maxItems ){
+	int count = 0, index = 0; 
+	void * base = array.base;
+	// int * numbers = array.base;
+	for(index = 0; index < array.length; index++){
+		if(match(hint,base)&&count<maxItems){
+			destination[count] = base;
+			count++;
+		}
+		base+=array.type_size;
+	}
+	return count;
+}

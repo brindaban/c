@@ -164,6 +164,24 @@ void test_for_count(){
 	dispose(array);
 }
 
+void test_for_filter(){
+	Array_util array = create(4,5);
+	int *numbers = (int *)(array.base);
+
+	numbers[0] = 1;
+	numbers[1] = 3;
+	numbers[2] = 6;
+	numbers[3] = 8;
+	numbers[4] = 5;
+	Array_util destination_array_isEven = create(4,5);
+	void * even_hint = NULL;
+	int maxItems = 5;
+	int size = filter(array, &isEven , even_hint, destination_array_isEven.base , maxItems );
+	assert(((int **)destination_array_isEven.base)[0] == &numbers[2]);
+	assert(((int **)destination_array_isEven.base)[1] == &numbers[3]);
+	assert(size = 2);
+}
+
 void use_of_dispose(){
 	Array_util array;
 	array = create(4,13);
@@ -179,6 +197,7 @@ int main(int argc, char const *argv[]){
 	test_for_find_last();
 	test_for_reverse();
 	test_for_count();
+	test_for_filter();
 	use_of_dispose();
 	return 0;
 }
