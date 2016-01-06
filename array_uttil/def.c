@@ -31,7 +31,7 @@ void dispose(Array_util array){
 }
 
 int findIndex(Array_util array, void* element){
-	char * list_of_array = (char *)(array.base);
+	void * list_of_array = (array.base);
 	for (int counter = 0; counter < array.length; counter++){
 		if(memcmp(list_of_array,element,array.type_size)==0)
 			return counter;
@@ -52,18 +52,22 @@ Array_util reverse_array(Array_util array){
 }
 
 void* findFirst(Array_util array, MatchFunc* match, void * hint){
-	int * numbers = array.base;
-	for (int counter = 0; counter < array.length; counter++)
-		if(match(hint,&numbers[counter]))
-			return &numbers[counter];
+	void * numbers = array.base;
+	for (int counter = 0; counter < array.length; counter++){
+		if(match(hint,numbers))
+			return numbers;
+		numbers += array.type_size;
+	}
 	return NULL;
 }
 
 void* findLast(Array_util array, MatchFunc* match, void * hint){
-	int * numbers = array.base;
-	for (int counter = array.length-1; counter >= 0; counter--)
-		if(match(hint,&numbers[counter]))
-			return &numbers[counter];
+	void * numbers = array.base + ((array.length-1)*array.type_size);
+	for (int counter = 0; counter < array.length; counter++){
+		if(match(hint,numbers))
+			return numbers;
+		numbers -= array.type_size;
+	}
 	return NULL;
 }
 
@@ -79,7 +83,6 @@ int count(Array_util array, MatchFunc* match, void* hint){
 int filter(Array_util array, MatchFunc* match, void* hint, void** destination, int maxItems ){
 	int count = 0, index = 0; 
 	void * base = array.base;
-	// int * numbers = array.base;
 	for(index = 0; index < array.length; index++){
 		if(match(hint,base)&&count<maxItems){
 			destination[count] = base;
