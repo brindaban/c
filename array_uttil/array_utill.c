@@ -240,6 +240,27 @@ void test_for_forEach(){
 	assert(numbers[4]==25);
 }
 
+void* sum(void* hint, void* previousItem, void* item){
+	*(int *)previousItem += *(int *)item;
+	return previousItem;
+}
+
+void test_for_reduce(){
+	Array_util array = create(4,5);
+
+	int *numbers = (int *)(array.base);
+
+	numbers[0] = 1;
+	numbers[1] = 3;
+	numbers[2] = 6;
+	numbers[3] = 8;
+	numbers[4] = 5;
+	void *hint = NULL;
+	int intialValue = 4;
+	int * result = (int *)reduce(array, &sum, hint, &intialValue);
+	assert(* result == 27);
+}
+
 void use_of_dispose(){
 	Array_util array;
 	array = create(4,13);
@@ -258,6 +279,7 @@ int main(int argc, char const *argv[]){
 	test_for_filter();
 	test_for_map();
 	test_for_forEach();
+	test_for_reduce();
 	use_of_dispose();
 	return 0;
 }

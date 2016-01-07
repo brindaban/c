@@ -110,3 +110,12 @@ void forEach(Array_util array, OperationFunc* operation, void* hint){
 		list_of_array+=array.type_size;
 	}
 }
+
+void* reduce(Array_util array, ReducerFunc* reducer, void* hint, void* initialValue){
+	void * list_of_array = array.base;
+	for(int i = 0; i<array.length; i++){
+		initialValue = reducer(hint, initialValue, list_of_array);
+		list_of_array += array.type_size;
+	}
+	return initialValue;
+}
