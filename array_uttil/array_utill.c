@@ -182,6 +182,35 @@ void test_for_filter(){
 	assert(size = 2);
 }
 
+void add(void* hint, void* sourceItem, void* destinationItem){
+	int * add_hint = (int *)hint;
+	int * source = (int *)sourceItem;
+	*(int *)destinationItem = * add_hint + *source;
+}
+
+void test_for_map(){
+	Array_util array = create(4,5);
+	Array_util destination_array = create(4,5);
+
+	int *numbers = (int *)(array.base);
+
+	numbers[0] = 1;
+	numbers[1] = 3;
+	numbers[2] = 6;
+	numbers[3] = 8;
+	numbers[4] = 5;
+
+	int add_hint = 4;
+	map(array, destination_array, &add, & add_hint);
+	int * destination_numbers = (int *)(destination_array.base);
+	assert(destination_numbers[0]==5);
+	assert(destination_numbers[1]==7);
+	assert(destination_numbers[2]==10);
+	assert(destination_numbers[3]==12);
+	assert(destination_numbers[4]==9);
+}
+
+
 void use_of_dispose(){
 	Array_util array;
 	array = create(4,13);
@@ -198,6 +227,7 @@ int main(int argc, char const *argv[]){
 	test_for_reverse();
 	test_for_count();
 	test_for_filter();
+	test_for_map();
 	use_of_dispose();
 	return 0;
 }

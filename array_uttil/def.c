@@ -92,3 +92,13 @@ int filter(Array_util array, MatchFunc* match, void* hint, void** destination, i
 	}
 	return count;
 }
+
+void map(Array_util source, Array_util destination, ConvertFunc* convert, void* hint){
+	void * list_of_source = source.base;
+	void * list_of_destination = destination.base;
+	for(int i = 0; i<source.length; i++){
+		convert(hint,list_of_source,list_of_destination);
+		list_of_source += source.type_size;
+		list_of_destination += destination.type_size;
+	}
+}
