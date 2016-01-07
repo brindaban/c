@@ -180,6 +180,8 @@ void test_for_filter(){
 	assert(((int **)destination_array_isEven.base)[0] == &numbers[2]);
 	assert(((int **)destination_array_isEven.base)[1] == &numbers[3]);
 	assert(size = 2);
+	dispose(array);
+	dispose(destination_array_isEven);
 }
 
 void add(void* hint, void* sourceItem, void* destinationItem){
@@ -208,8 +210,35 @@ void test_for_map(){
 	assert(destination_numbers[2]==10);
 	assert(destination_numbers[3]==12);
 	assert(destination_numbers[4]==9);
+	dispose(array);
+	dispose(destination_array);
 }
 
+void multiply(void* hint, void* item){
+	int * multiply_hint = (int *)hint;
+	*(int *)item = *(int *)item * (* multiply_hint);
+
+}
+
+void test_for_forEach(){
+	Array_util array = create(4,5);
+
+	int *numbers = (int *)(array.base);
+
+	numbers[0] = 1;
+	numbers[1] = 3;
+	numbers[2] = 6;
+	numbers[3] = 8;
+	numbers[4] = 5;
+
+	int multiply_hint = 5;
+	forEach(array, &multiply, &multiply_hint);
+	assert(numbers[0]==5);
+	assert(numbers[1]==15);
+	assert(numbers[2]==30);
+	assert(numbers[3]==40);
+	assert(numbers[4]==25);
+}
 
 void use_of_dispose(){
 	Array_util array;
@@ -228,6 +257,7 @@ int main(int argc, char const *argv[]){
 	test_for_count();
 	test_for_filter();
 	test_for_map();
+	test_for_forEach();
 	use_of_dispose();
 	return 0;
 }

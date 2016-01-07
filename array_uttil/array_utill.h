@@ -2,6 +2,8 @@ typedef int (MatchFunc)(void *, void *);
 
 typedef void (ConvertFunc)(void *, void *, void *);
 
+typedef void (OperationFunc)(void *, void *);
+
 typedef struct array_util
 {
 	void * base;
@@ -20,3 +22,4 @@ void* findLast(Array_util array, MatchFunc * match, void * hint);
 int count(Array_util array, MatchFunc* match, void* hint);
 int filter(Array_util array, MatchFunc* match, void* hint, void** destination, int maxItems );
 void map(Array_util source, Array_util destination, ConvertFunc* convert, void* hint);
+void forEach(Array_util array, OperationFunc* operation, void* hint);
