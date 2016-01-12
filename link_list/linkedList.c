@@ -28,3 +28,19 @@ int add_to_list(List * list_of_element,void * element_to_push){
 	list_of_element->length++;
 	return list_of_element->length;
 }
+
+void * get_first_element(List list_of_element){
+	return (element *)(list_of_element.first)->value;
+}
+
+void *get_last_element(List list_of_element){
+	return (element *)(list_of_element.last)->value;
+}
+
+void forEach(List list_of_element, ElementProcessor change_function){
+	element * node = (element *)(list_of_element.first);
+	while(node != NULL){
+		change_function(node->value);
+		node=node->next;
+	}
+}
