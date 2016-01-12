@@ -1,5 +1,5 @@
 typedef struct element{
-	int value;
+	void * value;
 	struct element * next;
 } element;
 
@@ -10,3 +10,4 @@ typedef struct list {
 } List;
 
 List createList(void);
+int add_to_list(List *, void *);
