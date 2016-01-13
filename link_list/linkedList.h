@@ -17,3 +17,4 @@ int add_to_list(List *, void *);
 void *get_first_element(List);
 void *get_last_element(List);
 void forEach(List, ElementProcessor );
+void * getElementAt(List, int );

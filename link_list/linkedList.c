@@ -44,3 +44,12 @@ void forEach(List list_of_element, ElementProcessor change_function){
 		node=node->next;
 	}
 }
+void * getElementAt(List list_of_element, int position){
+	int counter = 0;
+	element * node = (element *)(list_of_element.first);
+	while(counter<position){
+		node = node->next;
+		counter++;
+	}
+	return node->value;
+}

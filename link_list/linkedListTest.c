@@ -68,14 +68,31 @@ void test_for_forEach(){
 	int first = 20;
 	int second = 10;
 	int third = 0;
+
 	add_to_list(&list_of_element, &first);
 	add_to_list(&list_of_element, &second);
 	add_to_list(&list_of_element, &third);
+
 	forEach(list_of_element, &add_ten_with_each);
+
 	assert(*(int *)list_of_element.first->value == 30);
 	assert(*(int *)list_of_element.last->value == 10);
+}
 
+void test_for_getElementAt(){
+	List list_of_element;
+	list_of_element = createList();
+	int first = 20;
+	int second = 10;
+	int third = 0;
+	
+	add_to_list(&list_of_element, &first);
+	add_to_list(&list_of_element, &second);
+	add_to_list(&list_of_element, &third);
 
-
+	int * result = (int *)getElementAt(list_of_element,1);
+	assert(*result == 10);
+	result = (int *)getElementAt(list_of_element,2);
+	assert(*result == 0);
 
 }
