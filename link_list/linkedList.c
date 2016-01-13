@@ -1,5 +1,6 @@
 #include "linkedList.h"
 #include "stdlib.h"
+#include "stdio.h"
 
 void initialize(List *array) {
 	array->first =  NULL;
@@ -52,4 +53,16 @@ void * getElementAt(List list_of_element, int position){
 		counter++;
 	}
 	return node->value;
+}
+
+int indexOf(List list_of_element, void * value_pointer){
+	int counter = 0;
+	element * node = (element *)(list_of_element.first);
+	while(node != NULL){
+		if(node->value==value_pointer)
+			return counter;
+		node = node->next;
+		counter++;
+	}
+	return -1;
 }

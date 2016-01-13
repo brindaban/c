@@ -94,5 +94,20 @@ void test_for_getElementAt(){
 	assert(*result == 10);
 	result = (int *)getElementAt(list_of_element,2);
 	assert(*result == 0);
+}
+
+void test_for_indexOf(){
+	List list_of_element;
+	list_of_element = createList();
+	int first = 20;
+	int second = 10;
+	int third = 0;
+	
+	add_to_list(&list_of_element, &first);
+	add_to_list(&list_of_element, &second);
+	add_to_list(&list_of_element, &third);
+	assert(indexOf(list_of_element,&second)==1);
+	assert(indexOf(list_of_element,&first)==0);
+
 
 }
