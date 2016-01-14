@@ -66,3 +66,23 @@ int indexOf(List list_of_element, void * value_pointer){
 	}
 	return -1;
 }
+
+void * deleteElementAt(List *list_of_element, int position){
+	int counter = 0;
+	element * node = (element *)(list_of_element->first);
+	if(position >= list_of_element->length) return NULL;
+	if(position==0){
+		list_of_element->first = node->next;
+		list_of_element->length--;
+		return node->value;
+	}
+	while(counter < position-1){
+		node = node ->next;
+		counter++;
+	}
+
+	element * current = node->next;
+	node->next = current->next;
+	list_of_element->length--;
+	return current->value;
+}

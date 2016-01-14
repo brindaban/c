@@ -108,6 +108,27 @@ void test_for_indexOf(){
 	add_to_list(&list_of_element, &third);
 	assert(indexOf(list_of_element,&second)==1);
 	assert(indexOf(list_of_element,&first)==0);
+}
 
+void test_for_deleteElementAt(){
+	List list_of_element;
+	list_of_element = createList();
+	int first = 20;
+	int second = 10;
+	int third = 0;
+	int forth = 12;
+	int fifth = 15;
+
+	add_to_list(&list_of_element, &first);
+	add_to_list(&list_of_element, &second);
+	add_to_list(&list_of_element, &third);
+	add_to_list(&list_of_element, &forth);
+	add_to_list(&list_of_element, &fifth);
+
+
+	int * result = (int *)deleteElementAt(&list_of_element,0);
+	assert(list_of_element.length==4);
+	assert(list_of_element.first->value==&second);
+	assert(list_of_element.last->value==&fifth);
 
 }
