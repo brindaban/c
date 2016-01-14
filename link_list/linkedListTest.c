@@ -2,6 +2,14 @@
 #include <assert.h>
 #include <stdio.h>
 
+void print_list(List list_of_element){
+	element * node = list_of_element.first;
+	while(node!=NULL){
+		printf("%d\n", *(int *)node->value);
+		node = node->next;
+	}
+}
+
 void test_for_createList(){
 	List list_of_element;
 	list_of_element = createList();
@@ -205,4 +213,28 @@ void test_for_reverse(){
 	assert(*(int *)((element *)(reversed_list_of_element.last)->value)==21);
 	assert(reversed_list_of_element.length==5);
 
+}
+
+void multiply(void* hint, void* sourceItem, void* destinationItem){
+	*(int *)destinationItem = *(int *)sourceItem * *(int *)(hint);
+}
+
+void test_for_map(){
+	List list_of_element;
+	list_of_element = createList();
+	int first = 21;
+	int second = 10;
+	int third = 0;
+	int forth = 12;
+	int fifth = 15;
+
+	add_to_list(&list_of_element, &first);
+	add_to_list(&list_of_element, &second);
+	add_to_list(&list_of_element, &third);
+	add_to_list(&list_of_element, &forth);
+	add_to_list(&list_of_element, &fifth);
+	int hint = 5;
+	List convert_list_of_element = map(list_of_element, multiply, &hint);
+	assert(*(int *)convert_list_of_element.first->value==105);
+	assert(*(int *)convert_list_of_element.last->value==75);
 }

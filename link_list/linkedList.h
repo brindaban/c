@@ -2,6 +2,8 @@ typedef void (*ElementProcessor)(void *);
 
 typedef int (*MatchFunc)(void* , void*);
 
+typedef void (*ConvertFunc)(void* hint, void* sourceItem, void* destinationItem);
+
 
 typedef struct element{
 	void * value;
@@ -25,6 +27,7 @@ void * deleteElementAt(List *, int);
 List  filter(List, MatchFunc, void * );
 int asArray(List, void **, int );
 List reverse(List);
+List map(List, ConvertFunc, void * );
 
 
 

@@ -111,11 +111,23 @@ List  filter(List list_of_element, MatchFunc check_function, void * hint){
 }
 
 List reverse(List list_of_element){
-	void *size_allocate = calloc(list_of_element.length,8);
-	void **array = size_allocate;
+	void **array = calloc(list_of_element.length,8);
 	asArray(list_of_element,array,list_of_element.length);
 	List reversed_list_of_element = createList();
 	for(int i=list_of_element.length-1; i>=0; i--) 
 		add_to_list(&reversed_list_of_element, (void *)array[i]);
 	return reversed_list_of_element;
+}
+
+List map(List list_of_element, ConvertFunc change_function, void * hint ){
+	List convert_list_of_element = createList();
+	element * node = list_of_element.first;
+	void * destinationItem;
+	while(node != NULL){
+		destinationItem = malloc(sizeof(void *));
+		change_function(hint, node->value, destinationItem);
+		add_to_list(&convert_list_of_element,destinationItem);
+		node = node->next;
+	}
+	return convert_list_of_element;
 }
