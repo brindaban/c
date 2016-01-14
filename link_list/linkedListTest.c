@@ -132,3 +132,30 @@ void test_for_deleteElementAt(){
 	assert(list_of_element.last->value==&fifth);
 
 }
+
+void test_for_asArray(){
+	List list_of_element;
+	list_of_element = createList();
+	int first = 20;
+	int second = 10;
+	int third = 0;
+	int forth = 12;
+	int fifth = 15;
+
+	add_to_list(&list_of_element, &first);
+	add_to_list(&list_of_element, &second);
+	add_to_list(&list_of_element, &third);
+	add_to_list(&list_of_element, &forth);
+	add_to_list(&list_of_element, &fifth);
+
+	int *array[8], maxElements = 8;
+	void ** array_pointer = (void **)array;
+
+	int result = asArray(list_of_element,array_pointer,maxElements);
+	assert(result == 5);
+	assert(*array[0]==20);
+	assert(*array[1]==10);
+	assert(*array[2]==0);
+	assert(*array[3]==12);
+	assert(*array[4]==15);
+}

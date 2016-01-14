@@ -86,3 +86,15 @@ void * deleteElementAt(List *list_of_element, int position){
 	list_of_element->length--;
 	return current->value;
 }
+
+int asArray(List list_of_element, void ** array_pointer, int maxElements){
+	int counter = 0,length;
+	element *node = list_of_element.first;
+	length = list_of_element.length < maxElements ? list_of_element.length : maxElements;
+	for(counter = 0; counter < length; counter++){
+		*array_pointer = node->value;
+		array_pointer++;
+		node = node->next;
+	}
+	return length;
+}

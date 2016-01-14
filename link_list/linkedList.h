@@ -20,4 +20,8 @@ void forEach(List, ElementProcessor );
 void * getElementAt(List, int );
 int indexOf(List, void *);
 void * deleteElementAt(List *, int);
+// List  filter(List, MatchFunc, void * );
+int asArray(List, void **, int );
+
+
 
