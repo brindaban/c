@@ -159,3 +159,29 @@ void test_for_asArray(){
 	assert(*array[3]==12);
 	assert(*array[4]==15);
 }
+
+int isEven(void* hint, void* item){
+	int * number = (int *)(item);
+	return !(*number % 2);
+}
+
+void test_for_filter(){
+	List list_of_element;
+	list_of_element = createList();
+	int first = 21;
+	int second = 10;
+	int third = 0;
+	int forth = 12;
+	int fifth = 15;
+
+	add_to_list(&list_of_element, &first);
+	add_to_list(&list_of_element, &second);
+	add_to_list(&list_of_element, &third);
+	add_to_list(&list_of_element, &forth);
+	add_to_list(&list_of_element, &fifth);
+	void * even_hint = NULL;
+	List filtered_list_of_element = filter(list_of_element,&isEven,even_hint);
+	assert(filtered_list_of_element.length==3);
+	assert(*(int *)((element *)(filtered_list_of_element.first)->value) == 10);
+	assert(*(int *)((element *)(filtered_list_of_element.last)->value) == 12);
+}

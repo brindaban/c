@@ -98,3 +98,14 @@ int asArray(List list_of_element, void ** array_pointer, int maxElements){
 	}
 	return length;
 }
+
+List  filter(List list_of_element, MatchFunc check_function, void * hint){
+	List filtered_list_of_element = createList();
+	element * node = list_of_element.first;
+	while(node!=NULL){
+		if(check_function(hint,node->value))
+			add_to_list(&filtered_list_of_element,node->value);
+		node = node->next;
+	}
+	return filtered_list_of_element;
+}

@@ -1,5 +1,7 @@
 typedef void (*ElementProcessor)(void *);
 
+typedef int (*MatchFunc)(void* , void*);
+
 
 typedef struct element{
 	void * value;
@@ -20,7 +22,7 @@ void forEach(List, ElementProcessor );
 void * getElementAt(List, int );
 int indexOf(List, void *);
 void * deleteElementAt(List *, int);
-// List  filter(List, MatchFunc, void * );
+List  filter(List, MatchFunc, void * );
 int asArray(List, void **, int );
 
 

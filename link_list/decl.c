@@ -37,17 +37,17 @@ array->length--;
 return result;
 }
 void insert_in_position(List *array, int value, int position){
-int count = 1;
-element *e;
-e = (element *)malloc(sizeof(element));
-e->value = value;
-element *input;
-input = array->first;
-while(count<position-1){
-input = input->next;
-count++;
-}
-e->next = input->next;
-input->next = e;
-array->length++;
+	int count = 1;
+	element *e;
+	e = (element *)malloc(sizeof(element));
+	e->value = value;
+	element *input;
+	input = array->first;
+	while(count<position-1){
+	input = input->next;
+	count++;
+	}
+	e->next = input->next;
+	input->next = e;
+	array->length++;
 }
