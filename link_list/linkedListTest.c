@@ -185,3 +185,24 @@ void test_for_filter(){
 	assert(*(int *)((element *)(filtered_list_of_element.first)->value) == 10);
 	assert(*(int *)((element *)(filtered_list_of_element.last)->value) == 12);
 }
+
+void test_for_reverse(){
+	List list_of_element;
+	list_of_element = createList();
+	int first = 21;
+	int second = 10;
+	int third = 0;
+	int forth = 12;
+	int fifth = 15;
+
+	add_to_list(&list_of_element, &first);
+	add_to_list(&list_of_element, &second);
+	add_to_list(&list_of_element, &third);
+	add_to_list(&list_of_element, &forth);
+	add_to_list(&list_of_element, &fifth);
+	List reversed_list_of_element = reverse(list_of_element);
+	assert(*(int *)((element *)(reversed_list_of_element.first)->value)==15);
+	assert(*(int *)((element *)(reversed_list_of_element.last)->value)==21);
+	assert(reversed_list_of_element.length==5);
+
+}

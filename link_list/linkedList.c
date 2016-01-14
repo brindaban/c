@@ -109,3 +109,13 @@ List  filter(List list_of_element, MatchFunc check_function, void * hint){
 	}
 	return filtered_list_of_element;
 }
+
+List reverse(List list_of_element){
+	void *size_allocate = calloc(list_of_element.length,8);
+	void **array = size_allocate;
+	asArray(list_of_element,array,list_of_element.length);
+	List reversed_list_of_element = createList();
+	for(int i=list_of_element.length-1; i>=0; i--) 
+		add_to_list(&reversed_list_of_element, (void *)array[i]);
+	return reversed_list_of_element;
+}
