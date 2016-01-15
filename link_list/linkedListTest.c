@@ -238,3 +238,28 @@ void test_for_map(){
 	assert(*(int *)convert_list_of_element.first->value==105);
 	assert(*(int *)convert_list_of_element.last->value==75);
 }
+
+void* sum(void* hint, void* previousItem, void* item){
+	*(int *)previousItem += *(int *)item;
+	return previousItem;
+}
+
+void test_for_reduce(){
+	List list_of_element;
+	list_of_element = createList();
+	int first = 21;
+	int second = 10;
+	int third = 0;
+	int forth = 12;
+	int fifth = 15;
+
+	add_to_list(&list_of_element, &first);
+	add_to_list(&list_of_element, &second);
+	add_to_list(&list_of_element, &third);
+	add_to_list(&list_of_element, &forth);
+	add_to_list(&list_of_element, &fifth);
+	void *hint = NULL;
+	int intialValue = 4;
+	int * result = (int *)reduce(list_of_element, sum, hint, &intialValue);
+	assert(*result == 62);
+}

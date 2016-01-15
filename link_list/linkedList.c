@@ -131,3 +131,13 @@ List map(List list_of_element, ConvertFunc change_function, void * hint ){
 	}
 	return convert_list_of_element;
 }
+
+void * reduce(List list_of_element, Reducer reducer_function, void *hint, void *initialValue){
+	element * node = list_of_element.first;
+	while(node != NULL){
+		initialValue = reducer_function(hint,initialValue,node->value);
+		node = node->next;
+	}
+	return initialValue;
+}
+

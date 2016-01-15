@@ -4,6 +4,8 @@ typedef int (*MatchFunc)(void* , void*);
 
 typedef void (*ConvertFunc)(void* hint, void* sourceItem, void* destinationItem);
 
+typedef void * (*Reducer)(void* hint, void* previousItem, void* item);
+
 
 typedef struct element{
 	void * value;
@@ -28,6 +30,7 @@ List  filter(List, MatchFunc, void * );
 int asArray(List, void **, int );
 List reverse(List);
 List map(List, ConvertFunc, void * );
+void * reduce(List, Reducer, void *hint, void *initialValue);
 
 
 
